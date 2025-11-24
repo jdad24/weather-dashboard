@@ -2,11 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/',
-        destination: '/dashboard'        
+        destination: '/dashboard' ,
+        permanent: true       
       }
     ]
   }
