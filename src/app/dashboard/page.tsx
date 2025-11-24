@@ -10,7 +10,7 @@ export default async function Page() {
             <div className='h-screen w-screen bg-white'>
                 <BackgroundRenderer weatherDescription={weather.description}/>   
                 <div className="z-200 fixed h-screen w-screen">
-                    <h1 className="text-black text-5xl font-bold flex flex-row justify-left pt-8 pl-16">The Weather Hub</h1>
+                    <h1 className="text-black text-5xl font-bold flex flex-row justify-left pt-8 pl-16">The Weather HuB</h1>
                     <div className="flex flex-row justify-around pt-16">
                         <Card title='Current Temperature' data={weather.currentTemperature} />
                         <Card title='Weather' data={weather.description} />
