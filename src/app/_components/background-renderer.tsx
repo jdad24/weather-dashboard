@@ -22,7 +22,7 @@ const bkgVideos: BKGVideos = {
  * 
  * Contains background video for the app background. Uses context to decide the background video
  */
-export function BackgroundRenderer({ weatherDescription }: { weatherDescription: string }) {
+export function BackgroundRenderer({ weatherDescription = 'loading' }: { weatherDescription?: string }) {
     const [weatherKey, setWeatherKey] = useState('loading')
 
 
