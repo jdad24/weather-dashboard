@@ -3,60 +3,6 @@
 import { useState, useEffect } from "react";
 import { ResizeBoth } from "./resize-icon";
 import { cn } from "../lib/utils/cn";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
-// export default function WeatherTable({ data = {maxTemperature: [], minTemperature: [], weatherCode: []} }: { data: {maxTemperature?: Array<number>, minTemperature?: Array<number>, weatherCode?: Array<number>} }) {
-//   const [open, setOpen] = useState(true);
-
-//     useEffect(() => {
-//         console.log(data)
-
-//         renderWeatherRows(data)
-//     }, [data])
-
-//     const renderWeatherRows = (data: {maxTemperature?: any, minTemperature?: any, weatherCode?: any}) => {
-//         let numRows = Object.keys(data?.maxTemperature)?.length || 0
-        
-//         return (
-//             Array.from({length: numRows}).map((_, index) => 
-//                <TableRow
-//                key={'row-'+ index}
-//                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-//                >
-//                 <TableCell component="th" scope="row">{data.maxTemperature[index as number].toFixed(0)}</TableCell>
-//                 <TableCell>{data.minTemperature[index as number].toFixed(0)}</TableCell>
-//                </TableRow>
-//             )
-//         )
-
-//     }
-  
-//     return (
-//     <TableContainer sx={{height: 400, width: 1200, borderRadius: 5}} component={Paper}>
-//         <div className="flex flex-row float-right pt-1 pr-4">
-//             <ResizeBoth className="h-5 w-auto flex flex-row w-full hover:scale-150 hover:cursor-pointer" onClick={() => setOpen(!open)} />
-//         </div>        
-//       <Table sx={{ height: 400, width: 1200 }} aria-label="weather table">
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>High</TableCell>
-//             <TableCell>Low</TableCell>        
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//          {renderWeatherRows(data)}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// }
-
 
 export default function WeatherTable({ data = {maxTemperature: [1], minTemperature: [1], weatherCode: [9000], days: []} }: { data: {maxTemperature?: Array<any>, minTemperature?: Array<any>, weatherCode?: Array<any>, days: Array<any>} }) {
     const [open, setOpen] = useState(true);
