@@ -1,21 +1,44 @@
 import { FORECAST_URL } from "./constants"
-import { getHostUrl } from '@/app/lib/utils'
+import { getHostUrl } from '@/app/lib/utils/get-host-url'
 
 /**
  * Weather object that encapsulates weather data
  * 
- * @property {string} currentTemperature - Current temperature
- * @property {Array<string>} forecastedTemperature - Temperature 
- * @property {number} weatherCode - Weather code for the type of weather
- * @property {string} description - Weather Description
- * @property {string} time - Current Time
+ * @class
+ * @property {object} current - Data for the current weather
+ * @property {string} current.temperature - Current temperature
+ * @property {number} current.weatherCode - Weather code for the type of weather
+ * @property {string} current.description - Weather Description
+ * @property {string} current.time - Current Time
+ * 
+ * @property {object} daily - Object containing daily forecasted weather data
  */
 export class Weather {
-    currentTemperature: string = '';
-    forecastedTemperature: [string] = [''];
-    weatherCode: number = 9000;
-    description: string = ''
-    time: string = ''
+    current: {
+        currentTemperature: string;
+        weatherCode: number;
+        description: string
+        time: string
+    } = {
+            currentTemperature: '',
+            weatherCode: 9000,
+            description: '',
+            time: ''
+        }
+
+    daily: {
+        maxTemperature: Array<any>;
+        minTemperature: Array<any>;
+        weatherCode: Array<any>;    
+        day: Array<any>;        
+    } = {
+            maxTemperature: [],
+            minTemperature: [],  
+            weatherCode: [],
+            day: []          
+        }
+
+
 
 
     /**
@@ -25,16 +48,48 @@ export class Weather {
      * @param {string} longitude
      * @returns {void}
      */
-    async getCurrentWeather() {        
+    async getWeather() {
         const hostURL = await getHostUrl()
         const forecastData = await fetch(`${hostURL}${FORECAST_URL}`)
         const forecastJSON = await forecastData.json()
-        console.log(forecastJSON)
 
-        this.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"
-        this.weatherCode = forecastJSON.current.weather_code
-        this.description = this.convertWeatherCode()  
-        this.time = forecastJSON.current.time      
+        this.current.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"
+        this.current.weatherCode = forecastJSON.current.weather_code
+        this.current.description = this.convertWeatherCode(this.current.weatherCode)
+        this.current.time = this.formatTime(forecastJSON.current.time)
+
+        this.daily.maxTemperature = forecastJSON.daily.temperature_2m_max
+        this.daily.minTemperature = forecastJSON.daily.temperature_2m_min
+        this.daily.weatherCode = forecastJSON.daily.weather_code
+        this.daily.day = this.getDaysFromDates(forecastJSON.daily.time)
+    }
+
+    /**
+     * Format Date
+     * 
+     * @param {string} timeString - Time string
+     * @returns {string} Formatted time string
+     */
+    formatTime(time: string): string {
+        const date = new Date(time).toLocaleString()
+        return String(date)
+    }
+
+    /**
+     * Get Day from Date
+     * 
+     * @param {Array<string>} date 
+     * @returns {Array<string>}
+     */
+    getDaysFromDates(dates: Array<string>): Array<string> {        
+        const days: Array<string> = []
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        console.log(dates)
+        dates.map(date => {                    
+            days.push(new Date(date).toLocaleString('en-US', { weekday: 'long' }))
+        })
+        
+        return days
     }
 
     /**
@@ -42,8 +97,8 @@ export class Weather {
      * 
      * @returns {void}
      */
-    convertWeatherCode() {
-        switch (this.weatherCode) {
+    convertWeatherCode(weatherCode: number): string {
+        switch (weatherCode) {
             case 0:
                 return "Clear"
             case 1:
@@ -89,13 +144,4 @@ export class Weather {
                 return "N/A"
         }
     }
-}
-
-/**
- * Format Time
- * 
- * @param {string} Time - Time
- */
-function formatTime(time: string) {
-    return 
 }

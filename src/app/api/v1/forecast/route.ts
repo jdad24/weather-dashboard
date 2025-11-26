@@ -13,9 +13,11 @@ export async function GET() {
     const params = {
         latitude: 32.94,
         longitude: -97.13,
+        daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "rain_sum", "showers_sum", "snowfall_sum", "precipitation_sum", "precipitation_hours", "precipitation_probability_max"],
         current: ["temperature_2m", "precipitation", "rain", "is_day", "weather_code", "wind_speed_10m", "wind_direction_10m"],
+        timezone: "America/Chicago",
         wind_speed_unit: "mph",
-        temperature_unit: "fahrenheit",
+        temperature_unit: "fahrenheit",        
     };
 
     const responses = await fetchWeatherApi(url, params);
@@ -26,15 +28,19 @@ export async function GET() {
     const latitude = response.latitude();
     const longitude = response.longitude();
     const elevation = response.elevation();
+    const timezone = response.timezone();
+    const timezoneAbbreviation = response.timezoneAbbreviation();
     const utcOffsetSeconds = response.utcOffsetSeconds();
 
     console.log(
         `\nCoordinates: ${latitude}°N ${longitude}°E`,
         `\nElevation: ${elevation}m asl`,
+        `\nTimezone: ${timezone} ${timezoneAbbreviation}`,
         `\nTimezone difference to GMT+0: ${utcOffsetSeconds}s`,
     );
 
     const current = response.current()!;
+    const daily = response.daily()!;
 
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData = {
@@ -47,6 +53,21 @@ export async function GET() {
             weather_code: current.variables(4)!.value(),
             wind_speed_10m: current.variables(5)!.value(),
             wind_direction_10m: current.variables(6)!.value(),
+        },
+        daily: {
+            time: Array.from(
+                { length: (Number(daily.timeEnd()) - Number(daily.time())) / daily.interval() },
+                (_, i) => new Date((Number(daily.time()) + i * daily.interval() + utcOffsetSeconds) * 1000)
+            ),
+            weather_code: daily.variables(0)!.valuesArray(),
+            temperature_2m_max: daily.variables(1)!.valuesArray(),
+            temperature_2m_min: daily.variables(2)!.valuesArray(),
+            rain_sum: daily.variables(3)!.valuesArray(),
+            showers_sum: daily.variables(4)!.valuesArray(),
+            snowfall_sum: daily.variables(5)!.valuesArray(),
+            precipitation_sum: daily.variables(6)!.valuesArray(),
+            precipitation_hours: daily.variables(7)!.valuesArray(),
+            precipitation_probability_max: daily.variables(8)!.valuesArray(),
         },
     };
 
@@ -61,7 +82,6 @@ export async function GET() {
         `\nCurrent wind_speed_10m: ${weatherData.current.wind_speed_10m}`,
         `\nCurrent wind_direction_10m: ${weatherData.current.wind_direction_10m}`,
     );
-
-    console.log(weatherData)
+    console.log("\nDaily data:\n", weatherData.daily)
     return NextResponse.json(weatherData)
 }
