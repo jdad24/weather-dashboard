@@ -27,15 +27,15 @@ export class Weather {
         }
 
     daily: {
-        maxTemperature: Array<any>;
+        maxTemperature: Array<any>; //need to change to object
         minTemperature: Array<any>;
         weatherCode: Array<any>;    
-        day: Array<any>;        
+        days: Array<any>;        
     } = {
             maxTemperature: [],
             minTemperature: [],  
             weatherCode: [],
-            day: []          
+            days: []          
         }
 
 
@@ -61,7 +61,7 @@ export class Weather {
         this.daily.maxTemperature = forecastJSON.daily.temperature_2m_max
         this.daily.minTemperature = forecastJSON.daily.temperature_2m_min
         this.daily.weatherCode = forecastJSON.daily.weather_code
-        this.daily.day = this.getDaysFromDates(forecastJSON.daily.time)
+        this.daily.days = this.getDaysFromDates(forecastJSON.daily.time)
     }
 
     /**
@@ -83,12 +83,12 @@ export class Weather {
      */
     getDaysFromDates(dates: Array<string>): Array<string> {        
         const days: Array<string> = []
-        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        console.log(dates)
-        dates.map(date => {                    
-            days.push(new Date(date).toLocaleString('en-US', { weekday: 'long' }))
+
+        dates.map(date => {         
+            const splitDate = date.split("T")[0] + "T00:00:00"                  
+            days.push(new Date(splitDate).toLocaleString('en-US', { weekday: 'long', timeZone: "America/Chicago" }))
         })
-        
+   
         return days
     }
 

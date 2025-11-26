@@ -14,7 +14,7 @@ export default async function Page() {
             <div className="z-200 fixed h-screen w-screen">
                 <h1 className="text-black text-5xl font-bold flex flex-row justify-between pt-8 pl-16 pr-8">
                     The Weather Hub
-                    <TimeCard title='Time' data={weather.current.time} />
+                    <TimeCard title='Date' data={weather.current.time} />
                 </h1>
                 <div className="flex flex-row justify-around pt-16">
                     <Card title='Current Temperature' data={weather.current.currentTemperature} />
