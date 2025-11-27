@@ -86,7 +86,7 @@ export class Weather {
 
         dates.map(date => {         
             const splitDate = date.split("T")[0] + "T00:00:00"                  
-            days.push(new Date(splitDate).toLocaleString('en-US', { weekday: 'long', timeZone: "America/Chicago" }))
+            days.push(new Date(splitDate).toLocaleString('en-US', { weekday: 'long', timeZone: "America/Chicago" }))            
         })
    
         return days

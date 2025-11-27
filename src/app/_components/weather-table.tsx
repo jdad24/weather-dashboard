@@ -9,6 +9,7 @@ export default function WeatherTable({ data = {maxTemperature: [1], minTemperatu
 
    const renderWeatherRows = (data: {maxTemperature?: any, minTemperature?: any, weatherCode?: any, days: Array<string>}) => {
         let numRows = Object.keys(data?.maxTemperature)?.length || 0
+        data.days[0] = "Today" //Instead of listing the actual day, just use today for first value
         
         return (
             Array.from({length: numRows}).map((_, index) => 
