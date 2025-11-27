@@ -9,10 +9,21 @@ import { OPEN_METEO_FORECAST_URL } from "@/app/lib/constants";
 export async function GET() {
     const url = OPEN_METEO_FORECAST_URL;
 
+    let currentLatitude, currentLongitude;
+
+    if('geolocation' in Navigator) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                currentLatitude = position.coords.latitude
+                currentLongitude = position.coords.latitude
+            }
+        )
+    }
+
     //Hardcoded values - will use an api to get user current location
     const params = {
-        latitude: 32.94,
-        longitude: -97.13,
+        latitude: currentLatitude || 32.94,
+        longitude: currentLongitude || -97.13,
         daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "rain_sum", "showers_sum", "snowfall_sum", "precipitation_sum", "precipitation_hours", "precipitation_probability_max"],
         current: ["temperature_2m", "precipitation", "rain", "is_day", "weather_code", "wind_speed_10m", "wind_direction_10m"],
         timezone: "America/Chicago",
