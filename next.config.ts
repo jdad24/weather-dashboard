@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return  [
         {
-          source: '/',
-          destination: '/dashboard'
+          source: '/:path*',
+          destination: '/'
         }
       ] 
   }
