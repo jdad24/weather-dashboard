@@ -15,8 +15,8 @@ export default function WeatherTable({ data = {maxTemperature: [1], minTemperatu
             Array.from({length: numRows}).map((_, index) => 
                <tr key={'row-' + index} className="flex flex-row w-300 justify-between h-10">
                 <td className="w-1/3 text-center">{data.days[index as number]}</td>
-                <td className="w-1/3 text-center">{data.maxTemperature[index as number].toFixed(0)} F</td>
                 <td className="w-1/3 text-center">{data.minTemperature[index as number].toFixed(0)} F</td>
+                <td className="w-1/3 text-center">{data.maxTemperature[index as number].toFixed(0)} F</td>                
                </tr>
             )
         )
@@ -39,9 +39,9 @@ export default function WeatherTable({ data = {maxTemperature: [1], minTemperatu
                 </caption>
                 <thead className="text-xl flex flex-row w-300 pt-5">
                     <tr className="flex flex-row w-300 w-300 justify-between">
-                        <th className="w-1/3">Day</th>
-                        <th className="w-1/3">High</th>
+                        <th className="w-1/3">Day</th>                        
                         <th className="w-1/3">Low</th>
+                        <th className="w-1/3">High</th>
                     </tr>
                 </thead>
                 <tbody className="w-300">
