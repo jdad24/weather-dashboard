@@ -39,9 +39,9 @@ export default function WeatherTable({ data = {maxTemperature: [1], minTemperatu
                 </caption>
                 <thead className="text-xl flex flex-row w-300 pt-5">
                     <tr className="flex flex-row w-300 w-300 justify-between">
-                        <th className="w-1/3">Day</th>                        
-                        <th className="w-1/3">Low</th>
-                        <th className="w-1/3">High</th>
+                        <th className="w-1/3 underline">Day</th>                        
+                        <th className="w-1/3 underline">Low</th>
+                        <th className="w-1/3 underline">High</th>
                     </tr>
                 </thead>
                 <tbody className="w-300">
