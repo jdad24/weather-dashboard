@@ -20,7 +20,7 @@ export async function GET() {
         )
     }
 
-    //Hardcoded values - will use an api to get user current location
+    //Hardcoded values - will use an api to get user current location 
     const params = {
         latitude: currentLatitude || 32.94,
         longitude: currentLongitude || -97.13,
