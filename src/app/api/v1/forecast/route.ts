@@ -1,5 +1,6 @@
 import { fetchWeatherApi } from "openmeteo";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { geolocation } from "@vercel/functions";
 import { OPEN_METEO_FORECAST_URL } from "@/app/lib/constants";
 
 const url = OPEN_METEO_FORECAST_URL;
@@ -8,25 +9,12 @@ const url = OPEN_METEO_FORECAST_URL;
 /**
  * Retrieves weather data for the user's current location
  */
-export async function GET() {
-
-    let currentLatitude, currentLongitude;
-
-    // //Wont work - browser only not server compatible
-    // if('geolocation' in Navigator) {                 
-    //     navigator.geolocation.getCurrentPosition(
-    //         (position) => {
-    //             currentLatitude = position.coords.latitude
-    //             currentLongitude = position.coords.latitude
-    //         }
-    //     )
-    //     console.log(navigator)
-    // }
-
-    //Hardcoded values - will use an api to get user current location 
+export async function GET(request: NextRequest) {
+    const { city, country, latitude: geoLat, longitude: geoLong } = geolocation(request);
+    
     const params = {
-        latitude: currentLatitude || 32.94,
-        longitude: currentLongitude || -97.13,
+        latitude: geoLat || -82.86,
+        longitude: geoLong || 135.00,
         daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "rain_sum", "showers_sum", "snowfall_sum", "precipitation_sum", "precipitation_hours", "precipitation_probability_max"],
         current: ["temperature_2m", "precipitation", "rain", "is_day", "weather_code", "wind_speed_10m", "wind_direction_10m"],
         timezone: "America/Chicago",
@@ -83,6 +71,8 @@ export async function GET() {
             precipitation_hours: daily.variables(7)!.valuesArray(),
             precipitation_probability_max: daily.variables(8)!.valuesArray(),
         },
+        city,
+        country
     };
 
     // The 'weatherData' object now contains a simple structure, with arrays of datetimes and weather information

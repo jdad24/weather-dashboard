@@ -12,6 +12,8 @@ import { getHostUrl } from '@/app/lib/utils/get-host-url'
  * @property {string} current.time - Current Time
  * 
  * @property {object} daily - Object containing daily forecasted weather data
+ * @property {string} city - User's city
+ * @property {string} country - User's Country
  */
 export class Weather {
     current: {
@@ -40,7 +42,8 @@ export class Weather {
             weatherDescriptions: {}       
         }
 
-
+    city: string = '';
+    country: string = ''
 
 
     /**
@@ -64,6 +67,8 @@ export class Weather {
         this.daily.minTemperatures = forecastJSON.daily.temperature_2m_min
         this.daily.weatherCodes = forecastJSON.daily.weather_code
         this.daily.days = this.getDaysFromDates(forecastJSON.daily.time)
+        this.city = forecastJSON.city
+        this.country = forecastJSON.country
 
         for(let i = 0; i<= Object.keys(this.daily.weatherCodes).length; i++){
             this.daily.weatherDescriptions[i] = this.convertWeatherCode(this.daily.weatherCodes[i])
