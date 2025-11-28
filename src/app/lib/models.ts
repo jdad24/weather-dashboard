@@ -27,15 +27,15 @@ export class Weather {
         }
 
     daily: {
-        maxTemperatures: Array<number>; //need to change to object
-        minTemperatures: Array<number>;
-        weatherCodes: Array<number>;    
+        maxTemperatures: Record<string, number>; //need to change to object
+        minTemperatures: Record<string, string>;
+        weatherCodes: Record<string, string>;    
         days: Array<string>;       
         weatherDescriptions: Record<string, string>
     } = {
-            maxTemperatures: [],
-            minTemperatures: [],  
-            weatherCodes: [],
+            maxTemperatures: {},
+            minTemperatures: {},  
+            weatherCodes: {},
             days: [],   
             weatherDescriptions: {}       
         }
