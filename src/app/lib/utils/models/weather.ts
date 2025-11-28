@@ -52,8 +52,8 @@ export class Weather {
      * @param {string} longitude
      * @returns {void}
      */
-    async getWeather(coordinates: {latitude: number; longitude: number}) {        
-        const forecastData = await fetch(`${FORECAST_URL}?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`)
+    async getWeather() {        
+        const forecastData = await fetch(FORECAST_URL)
         const forecastJSON = await forecastData.json()
 
         this.current.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"
