@@ -4,19 +4,20 @@ import { useState, useEffect } from "react";
 import { ResizeBoth } from "./resize-icon";
 import { cn } from "../lib/utils/cn";
 
-export default function WeatherTable({ data = {maxTemperature: [1], minTemperature: [1], weatherCode: [9000], days: []} }: { data: {maxTemperature?: Array<any>, minTemperature?: Array<any>, weatherCode?: Array<any>, days: Array<any>} }) {
+export default function WeatherTable({ data = {maxTemperatures: {}, minTemperatures: {}, weatherCodes: {}, days: [], weatherDescriptions: {}} }: { data: {maxTemperatures?: Record<string, number>, minTemperatures?: Record<string, number>, weatherCodes?: Record<string, number>, days: Array<string>, weatherDescriptions: Record<string, string>} }) {
     const [open, setOpen] = useState(true);
 
-   const renderWeatherRows = (data: {maxTemperature?: any, minTemperature?: any, weatherCode?: any, days: Array<string>}) => {
-        let numRows = Object.keys(data?.maxTemperature)?.length || 0
+   const renderWeatherRows = (data: {maxTemperatures: Record<string, number>, minTemperatures: Record<string, number>, weatherCodes: Record<string, number>, days: Array<string>, weatherDescriptions: Record<string, string>}) => {
+        let numRows = Object.keys(data?.maxTemperatures)?.length || 0
         data.days[0] = "Today" //Instead of listing the actual day, just use today for first value
         
         return (
             Array.from({length: numRows}).map((_, index) => 
                <tr key={'row-' + index} className="flex flex-row w-300 justify-between h-10">
                 <td className="w-1/3 text-center">{data.days[index as number]}</td>
-                <td className="w-1/3 text-center">{data.minTemperature[index as number].toFixed(0)} F</td>
-                <td className="w-1/3 text-center">{data.maxTemperature[index as number].toFixed(0)} F</td>                
+                <td className="w-1/3 text-center">{data.minTemperatures[index as number].toFixed(0)} F</td>
+                <td className="w-1/3 text-center">{data.maxTemperatures[index as number].toFixed(0)} F</td>  
+                <td className="w-1/3 text-center">{data.weatherDescriptions[index as number]}</td>                
                </tr>
             )
         )
@@ -42,6 +43,7 @@ export default function WeatherTable({ data = {maxTemperature: [1], minTemperatu
                         <th className="w-1/3 underline">Day</th>                        
                         <th className="w-1/3 underline">Low</th>
                         <th className="w-1/3 underline">High</th>
+                        <th className="w-1/3 underline">Weather</th>
                     </tr>
                 </thead>
                 <tbody className="w-300">

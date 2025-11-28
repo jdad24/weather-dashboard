@@ -10,7 +10,7 @@ export default async function Page() {
 
     return (
         <div className='h-screen w-screen bg-white'>
-            <BackgroundRenderer weatherDescription={weather.current.description} />
+            <BackgroundRenderer weatherDescription={weather.current.weatherDescription} />
             <div className="z-200 fixed h-screen w-screen">
                 <h1 className="text-black text-5xl font-bold flex flex-row justify-between pt-8 pl-16 pr-8">
                     The Weather Hub
@@ -18,7 +18,7 @@ export default async function Page() {
                 </h1>
                 <div className="flex flex-row justify-around pt-16">
                     <Card title='Current Temperature' data={weather.current.currentTemperature} />
-                    <Card title='Weather' data={weather.current.description} />
+                    <Card title='Weather' data={weather.current.weatherDescription} />
                 </div>
                 <div className="flex flex-row justify-center mt-20 font-bold">
                     <WeatherTable data={weather.daily} />

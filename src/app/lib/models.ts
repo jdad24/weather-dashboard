@@ -17,25 +17,27 @@ export class Weather {
     current: {
         currentTemperature: string;
         weatherCode: number;
-        description: string
+        weatherDescription: string
         time: string
     } = {
             currentTemperature: '',
             weatherCode: 9000,
-            description: '',
+            weatherDescription: '',
             time: ''
         }
 
     daily: {
-        maxTemperature: Array<any>; //need to change to object
-        minTemperature: Array<any>;
-        weatherCode: Array<any>;    
-        days: Array<any>;        
+        maxTemperatures: Array<number>; //need to change to object
+        minTemperatures: Array<number>;
+        weatherCodes: Array<number>;    
+        days: Array<string>;       
+        weatherDescriptions: Record<string, string>
     } = {
-            maxTemperature: [],
-            minTemperature: [],  
-            weatherCode: [],
-            days: []          
+            maxTemperatures: [],
+            minTemperatures: [],  
+            weatherCodes: [],
+            days: [],   
+            weatherDescriptions: {}       
         }
 
 
@@ -55,13 +57,19 @@ export class Weather {
 
         this.current.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"
         this.current.weatherCode = forecastJSON.current.weather_code
-        this.current.description = this.convertWeatherCode(this.current.weatherCode)
+        this.current.weatherDescription = this.convertWeatherCode(this.current.weatherCode)
         this.current.time = this.formatTime(forecastJSON.current.time)
 
-        this.daily.maxTemperature = forecastJSON.daily.temperature_2m_max
-        this.daily.minTemperature = forecastJSON.daily.temperature_2m_min
-        this.daily.weatherCode = forecastJSON.daily.weather_code
+        this.daily.maxTemperatures = forecastJSON.daily.temperature_2m_max
+        this.daily.minTemperatures = forecastJSON.daily.temperature_2m_min
+        this.daily.weatherCodes = forecastJSON.daily.weather_code
         this.daily.days = this.getDaysFromDates(forecastJSON.daily.time)
+
+        for(let i = 0; i<= Object.keys(this.daily.weatherCodes).length; i++){
+            this.daily.weatherDescriptions[i] = this.convertWeatherCode(this.daily.weatherCodes[i])
+        }
+        
+        console.log("Weather Class Object ", this.daily)
     }
 
     /**
