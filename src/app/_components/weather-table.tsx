@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { ResizeBoth } from "./resize-icon";
 import { cn } from "../lib/utils/cn";
 
-export default function WeatherTable({ data = {maxTemperatures: {}, minTemperatures: {}, weatherCodes: {}, days: [], weatherDescriptions: {}} }: { data: {maxTemperatures?: Record<string, number>, minTemperatures?: Record<string, number>, weatherCodes?: Record<string, number>, days: Array<string>, weatherDescriptions: Record<string, string>} }) {
+export default function WeatherTable({ data = {maxTemperatures: {}, minTemperatures: {}, weatherCodes: {}, days: [], weatherDescriptions: {}} }: { data: {maxTemperatures: Record<string, number>, minTemperatures: Record<string, number>, weatherCodes: Record<string, number>, days: Array<string>, weatherDescriptions: Record<string, string>} }) {
     const [open, setOpen] = useState(true);
 
    const renderWeatherRows = (data: {maxTemperatures: Record<string, number>, minTemperatures: Record<string, number>, weatherCodes: Record<string, number>, days: Array<string>, weatherDescriptions: Record<string, string>}) => {
-        let numRows = Object.keys(data?.maxTemperatures)?.length || 0
+        let numRows = Object.keys(data.maxTemperatures).length || 0
         data.days[0] = "Today" //Instead of listing the actual day, just use today for first value
         
         return (
