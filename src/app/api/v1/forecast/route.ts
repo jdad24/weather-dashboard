@@ -2,24 +2,26 @@ import { fetchWeatherApi } from "openmeteo";
 import { NextResponse } from "next/server";
 import { OPEN_METEO_FORECAST_URL } from "@/app/lib/constants";
 
+const url = OPEN_METEO_FORECAST_URL;
+
 
 /**
  * Retrieves weather data for the user's current location
  */
 export async function GET() {
-    const url = OPEN_METEO_FORECAST_URL;
 
     let currentLatitude, currentLongitude;
 
-    if('geolocation' in Navigator) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                currentLatitude = position.coords.latitude
-                currentLongitude = position.coords.latitude
-            }
-        )
-        console.log(navigator)
-    }
+    // //Wont work - browser only not server compatible
+    // if('geolocation' in Navigator) {                 
+    //     navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             currentLatitude = position.coords.latitude
+    //             currentLongitude = position.coords.latitude
+    //         }
+    //     )
+    //     console.log(navigator)
+    // }
 
     //Hardcoded values - will use an api to get user current location 
     const params = {
