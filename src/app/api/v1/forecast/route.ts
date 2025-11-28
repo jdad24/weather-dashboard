@@ -18,6 +18,7 @@ export async function GET() {
                 currentLongitude = position.coords.latitude
             }
         )
+        console.log(navigator)
     }
 
     //Hardcoded values - will use an api to get user current location 
