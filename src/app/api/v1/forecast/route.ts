@@ -10,11 +10,11 @@ const url = OPEN_METEO_FORECAST_URL;
  * Retrieves weather data for the user's current location
  */
 export async function GET(request: NextRequest) {
-    const { city, country, latitude: geoLat, longitude: geoLong } = geolocation(request);
-    
+    const { city = "", country = "Antarctica", latitude: geoLat = -82.86, longitude: geoLong = 135.00 } = geolocation(request);
+
     const params = {
-        latitude: geoLat || -82.86,
-        longitude: geoLong || 135.00,
+        latitude: geoLat,
+        longitude: geoLong,
         daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "rain_sum", "showers_sum", "snowfall_sum", "precipitation_sum", "precipitation_hours", "precipitation_probability_max"],
         current: ["temperature_2m", "precipitation", "rain", "is_day", "weather_code", "wind_speed_10m", "wind_direction_10m"],
         timezone: "America/Chicago",
