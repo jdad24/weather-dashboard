@@ -15,7 +15,7 @@ const bkgVideos: BKGVideos = {
     sunny: "/sunny-background.mp4",
     rain: "/rain-background.mp4",
     lightning: "/lightning-background.mp4",
-    loading: "/loading-background.mp4",
+    loading: "/waterfall-background.mp4",
 }
 
 /**
