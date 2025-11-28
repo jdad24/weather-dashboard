@@ -11,6 +11,7 @@ const url = OPEN_METEO_FORECAST_URL;
  */
 export async function GET(request: NextRequest) {
     const { city = "", country = "Antarctica", latitude: geoLat = -82.86, longitude: geoLong = 135.00 } = geolocation(request);
+    console.log(await geolocation(request))
 
     const params = {
         latitude: geoLat,

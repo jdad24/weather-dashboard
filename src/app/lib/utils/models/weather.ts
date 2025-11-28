@@ -1,5 +1,4 @@
-import { FORECAST_URL } from "./constants"
-import { getHostUrl } from '@/app/lib/utils/get-host-url'
+import { FORECAST_URL } from "../../constants"
 
 /**
  * Weather object that encapsulates weather data
@@ -53,9 +52,8 @@ export class Weather {
      * @param {string} longitude
      * @returns {void}
      */
-    async getWeather() {
-        const hostURL = await getHostUrl()
-        const forecastData = await fetch(`${hostURL}${FORECAST_URL}`)
+    async getWeather(coordinates: {latitude: number; longitude: number}) {        
+        const forecastData = await fetch(`${FORECAST_URL}?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`)
         const forecastJSON = await forecastData.json()
 
         this.current.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"
