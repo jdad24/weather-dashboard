@@ -21,8 +21,8 @@ export default function MainContent() {
     return <>
          <BackgroundRenderer weatherDescription={weather?.current?.weatherDescription} />
                 <div className="z-200 fixed h-screen w-screen">
-                    <h1 className="text-black text-5xl font-bold flex flex-row justify-between pt-8 pl-16 pr-8">
-                        The Weather Hub
+                    <h1 className="text-white text-2xl font-bold flex flex-row justify-between pt-8 pl-16 pr-8">
+                        <div className="bg-blue-900 opacity-80 w-1/5 shadow-black shadow-lg flex flex-row items-center pl-8 rounded-xl tracking-widest ">The Weather Hub</div>
                         <TimeCard title='Location' city={weather?.city} country={weather?.country} />
                     </h1>
                     <div className="flex flex-row justify-around pt-16">
