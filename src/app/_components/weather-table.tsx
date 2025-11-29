@@ -51,6 +51,43 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
         )
     }
 
+    const renderMobileTableRows = () => {
+        let numRows = Object.keys(data.maxTemperatures).length || 0
+        data.days[0] = "Today" //Instead of listing the actual day, just use today for first value
+        return (
+            <>
+                {
+                    Array.from({ length: numRows }).map((_, index) =>
+                        <tr key={`row-${index}`} className="w-full flex flex-row justify-start pt-5 pl-5">
+                            <td className="w-1/4 text-center">{data.days[index as number]}</td>
+                            <td className="w-1/4 text-center">{data.minTemperatures[index as number].toFixed(0)} F</td>
+                            <td className="w-1/4 text-center">{data.maxTemperatures[index as number].toFixed(0)} F</td>
+                            <td className="w-1/4 text-center">{data.weatherDescriptions[index as number]}</td>
+                        </tr>
+                    )
+                }
+
+            </>
+        )
+    }
+
+    const renderMobileTable = () => {
+        return (
+            <table className="h-100 w-100 bg-blue-900 text-white text-sm">
+                <caption className="bg-blue-900">Daily Forecast</caption>
+                <tbody>
+                    <tr className="w-full flex flex-row justify-start gap-10 p-5">
+                        <th className="w-1/4 text-center">Day</th>
+                        <th className="w-1/4 text-center">Low</th>
+                        <th className="w-1/4 text-center">High</th>
+                        <th className="w-1/4 text-center">Weather</th>
+                    </tr>
+                    {renderMobileTableRows()}
+                </tbody>
+            </table>
+        )
+    }
+
     return (
         <div className={cn(
             "rounded-3xl overflow-hidden shadow-black shadow-lg opacity-90",
@@ -60,7 +97,7 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
             }
 
         )}>
-            {isMobile ? null : renderDesktopTable()}
+            {isMobile ? renderMobileTable() : renderDesktopTable()}
         </div>
     )
 }
