@@ -90,7 +90,7 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
 
     return (
         <div className={cn(
-            "rounded-3xl shadow-black shadow-lg opacity-90 overflow-auto",
+            "rounded-3xl shadow-black shadow-lg opacity-90 overflow-x-auto",
             {
                 'h-70 lg:h-auto w-auto': open,
                 'h-15 w-auto': !open
