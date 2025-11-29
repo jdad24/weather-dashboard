@@ -21,11 +21,11 @@ export default function MainContent() {
     return <>
          <BackgroundRenderer weatherDescription={weather?.current?.weatherDescription} />
                 <div className="z-200 fixed h-screen w-screen">
-                    <h1 className="text-white text-2xl font-bold flex flex-row justify-between pt-8 pl-16 pr-8">
-                        <div className="bg-blue-900 opacity-80 w-1/5 shadow-black shadow-lg flex flex-row items-center pl-8 rounded-xl tracking-widest ">The Weather Hub</div>
+                    <h1 className="text-white lg:text-2xl font-bold flex flex-row justify-center lg:justify-between pt-8 pl-16 pr-16">
+                        <div className="hidden lg:flex bg-blue-900 opacity-80 w-1/4 shadow-black shadow-lg flex-row justify-center items-center rounded-xl tracking-widest ">The Weather Hub</div>
                         <LocationCard title='Location' city={weather?.city} country={weather?.country} />
                     </h1>
-                    <div className="flex flex-row justify-around pt-16">
+                    <div className="flex flex-col lg:flex-row items-center lg:justify-around gap-8 pt-8 lg:pt-16">
                         <Card title='Current Temperature' data={weather?.current?.currentTemperature} />
                         <Card title='Weather' data={weather?.current?.weatherDescription} />
                     </div>
