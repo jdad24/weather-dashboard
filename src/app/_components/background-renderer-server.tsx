@@ -19,7 +19,7 @@ const bkgVideos: any = {
 export function BackgroundRendererServer() {
 
     return (
-        <div className="h-screen w-screen absolute">                  
+        <div className="h-screen w-screen fixed">                  
             <video className="object-cover h-screen w-screen" autoPlay muted loop playsInline key={'loading'+'-vid'}>
                 <source src={bkgVideos['loading']} type="video/mp4" />
             </video>

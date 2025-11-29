@@ -67,7 +67,7 @@ export function BackgroundRenderer({ weatherDescription = 'loading' }: { weather
     }, [weatherDescription, weatherKey])
 
     return (
-        <div className="h-screen w-screen absolute">                  
+        <div className="h-screen w-screen fixed">                  
             <video className="object-cover h-screen w-screen" autoPlay muted loop playsInline key={weatherKey+'-vid'}>
                 <source src={bkgVideos[weatherKey]} type="video/mp4" />
             </video>
