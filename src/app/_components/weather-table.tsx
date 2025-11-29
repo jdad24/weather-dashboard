@@ -58,7 +58,7 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
             <>
                 {
                     Array.from({ length: numRows }).map((_, index) =>
-                        <tr key={`row-${index}`} className="w-full flex flex-row justify-start pt-5 pl-5">
+                        <tr key={`row-${index}`} className="w-full flex flex-row justify-start pt-5 pr-5">
                             <td className="w-1/4 text-center">{data.days[index as number]}</td>
                             <td className="w-1/4 text-center">{data.minTemperatures[index as number].toFixed(0)} F</td>
                             <td className="w-1/4 text-center">{data.maxTemperatures[index as number].toFixed(0)} F</td>
@@ -76,11 +76,11 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
             <table className="h-100 w-100 bg-blue-900 text-white text-sm">
                 <caption className="bg-blue-900">Daily Forecast</caption>
                 <tbody>
-                    <tr className="w-full flex flex-row justify-start gap-10 p-5">
-                        <th className="w-1/4 text-center">Day</th>
-                        <th className="w-1/4 text-center">Low</th>
-                        <th className="w-1/4 text-center">High</th>
-                        <th className="w-1/4 text-center">Weather</th>
+                    <tr className="w-full flex flex-row justify-start pt-5 pr-5">
+                        <th className="w-1/4 text-center underline">Day</th>
+                        <th className="w-1/4 text-center underline">Low</th>
+                        <th className="w-1/4 text-center underline">High</th>
+                        <th className="w-1/4 text-center underline">Weather</th>
                     </tr>
                     {renderMobileTableRows()}
                 </tbody>
