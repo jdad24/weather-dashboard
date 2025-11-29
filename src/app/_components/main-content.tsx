@@ -29,7 +29,7 @@ export default function MainContent() {
                         <Card title='Current Temperature' data={weather?.current?.currentTemperature} />
                         <Card title='Weather' data={weather?.current?.weatherDescription} />
                     </div>
-                    <div className="flex flex-row justify-center mt-20 font-bold">
+                    <div className="flex flex-row justify-center mt-10 lg:mt-20 font-bold">
                         <WeatherTable data={weather.daily} />
                     </div>
                 </div>

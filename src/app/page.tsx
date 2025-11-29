@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export default async function Page() {
     return (
-        <div className='h-screen w-screen overflow-scroll'>
+        <div className='h-screen w-screen overflow-clip'>
             <Suspense fallback={<BackgroundRenderer />}>
                 <MainContent />
             </Suspense>
