@@ -17,7 +17,7 @@ export default function MainContent() {
             await weather.getWeather()
             setWeather(weather)
 
-            addWeatherRecord(weather.current.weatherDescription, weather.city, weather.country)
+            addWeatherRecord(weather.current.weatherDescription, weather.city, weather.country, weather.current.currentTemperature)
 
         })()
     }, [])
