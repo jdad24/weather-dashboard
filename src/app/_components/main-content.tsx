@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Weather } from "../lib/utils/models/weather";
+import { Weather } from "../lib/models/weather";
 import { BackgroundRenderer } from "./background-renderer";
 import LocationCard from "./location-card";
 import Card from "./card";
 import WeatherTable from "./weather-table";
+import { addWeatherRecord } from "../actions";
 
 export default function MainContent() {
     const [weather, setWeather] = useState<any>({})
@@ -15,6 +16,8 @@ export default function MainContent() {
             const weather = new Weather()
             await weather.getWeather()
             setWeather(weather)
+
+            addWeatherRecord(weather.current.weatherDescription, weather.city, weather.country)
 
         })()
     }, [])

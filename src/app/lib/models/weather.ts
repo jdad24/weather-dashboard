@@ -1,4 +1,4 @@
-import { FORECAST_URL } from "../../constants"
+import { FORECAST_URL } from "../constants"
 
 /**
  * Weather object that encapsulates weather data

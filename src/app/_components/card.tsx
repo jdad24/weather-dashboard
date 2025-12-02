@@ -1,3 +1,4 @@
+'use client'
 export default function Card({ title = "Example", data }: { title: string, data: string }) {
     return (
         <div className="w-70 h-20 lg:w-96 lg:h-40 bg-blue-900 opacity-90 text-white rounded-3xl overflow-clip shadow-lg shadow-black">
