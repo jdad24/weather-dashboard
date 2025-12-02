@@ -19,6 +19,8 @@ export default function MainContent() {
 
             addWeatherRecord(weather.current.weatherDescription, weather.city, weather.country, weather.current.currentTemperature)
 
+            await fetch('/api/v1/weather-visits')
+
         })()
     }, [])
     return <>
