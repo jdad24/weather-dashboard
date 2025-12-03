@@ -16,7 +16,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
         return records.map((record, index) => 
             <tr key={'row-' + index} className="flex flex-row w-screen justify-between h-10">
                 <td className="w-1/5 text-center">{record.id}</td>
-                <td className="w-1/5 text-center">{record.weather_description} F</td>
+                <td className="w-1/5 text-center">{record.weather_description}</td>
                 <td className="w-1/5 text-center">{record.city}</td>
                 <td className="w-1/5 text-center">{record.country}</td>
                 <td className="w-1/5 text-center">{record.current_temp}</td>
@@ -51,7 +51,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
         return records.map((record, index) => 
             <tr key={'row-' + index} className="flex flex-row w-screen justify-start pt-5 pr-5">
                 <td className="w-1/5 text-center">{record.id}</td>
-                <td className="w-1/5 text-center">{record.weather_description} F</td>
+                <td className="w-1/5 text-center">{record.weather_description}</td>
                 <td className="w-1/5 text-center">{record.city}</td>
                 <td className="w-1/5 text-center">{record.country}</td>
                 <td className="w-1/5 text-center">{record.current_temp}</td>
@@ -61,7 +61,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     const renderMobileTable = () => {
         return (
-            <table className="h-100 w-100 bg-blue-900 text-white text-sm">
+            <table className="h-screen w-screen bg-blue-900 text-white text-sm">
                 <caption className="bg-blue-900">Daily Forecast</caption>
                 <tbody>
                     <tr className="w-full flex flex-row justify-start pt-5 pr-5">
