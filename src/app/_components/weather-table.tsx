@@ -37,7 +37,7 @@ export default function WeatherTable({ data = { maxTemperatures: {}, minTemperat
                     <ResizeBoth className="h-8 w-auto hover:scale-150 hover:cursor-pointer pr-5" onClick={() => setOpen(!open)} />
                 </caption>
                 <thead className="text-xl flex flex-row w-300 pt-5">
-                    <tr className="flex flex-row w-300 w-300 justify-between">
+                    <tr className="flex flex-row w-300 justify-between">
                         <th className="w-1/3 underline">Day</th>
                         <th className="w-1/3 underline">Low</th>
                         <th className="w-1/3 underline">High</th>
