@@ -7,8 +7,8 @@ export default async function Page() {
     console.log(records)
 
     return (
-        <div>
-            <h1 className="bg-black flex flex-row justify-center sticky top-0 z-100 h-10 items-center">Weather Data Archive (Visitor Data)</h1>
+        <div className="h-full w-full">
+            <h1 className="bg-black text-white flex flex-row justify-center sticky top-0 z-100 h-10 items-center">Weather Data Archive (Visitor Data)</h1>
             <VisitsTable records={records} />
         </div>
     )

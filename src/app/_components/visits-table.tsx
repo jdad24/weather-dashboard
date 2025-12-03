@@ -15,7 +15,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     const renderDesktopWeatherRows = (records: Array<Record<string, any>>) => {
         return records.map((record, index) => 
-            <tr key={'row-' + index} className="flex flex-row w-screen justify-between h-10">
+            <tr key={'row-' + index} className="flex flex-row w-auto justify-between h-10">
                 <td className="w-1/5 text-center">{record.id}</td>
                 <td className="w-1/5 text-center">{record.weather_description}</td>
                 <td className="w-1/5 text-center">{record.city}</td>
@@ -27,14 +27,13 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     const renderDesktopTable = () => {
         return (
-            <table className="h-screen w-screen bg-blue-900 text-white">
-                <caption className="w-screen text-3xl text-white flex flex-row justify-between pt-2 pl-10 pb-3 border-b-2">
-                    Visit Archive
-                    {/* <ResizeBoth className="h-8 w-auto hover:scale-150 hover:cursor-pointer pr-5" onClick={() => setOpen(!open)} /> */}
+            <table className="h-screen w-full bg-blue-900 text-white">
+                {/* <caption className="w-full text-3xl text-white flex flex-row justify-between pt-2 pl-10 pb-3 border-b-2">
+                    Visit Archive                    
                     <Link className="bg-black hover:scale-120 hover:cursor-pointer pl-5 pr-5 mr-5 rounded-3xl" href="/dashboard">Back</Link>
-                </caption>
-                <thead className="text-xl flex flex-row w-screen pt-5">
-                    <tr className="flex flex-row w-screen justify-between">
+                </caption> */}
+                <thead className="text-xl flex flex-row w-full pt-5">
+                    <tr className="flex flex-row w-full justify-between">
                         <th className="w-1/5 underline">ID</th>
                         <th className="w-1/5 underline">Weather</th>
                         <th className="w-1/5 underline">City</th>
@@ -51,7 +50,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     const renderMobileTableRows = () => {
         return records.map((record, index) => 
-            <tr key={'row-' + index} className="flex flex-row w-screen justify-start pt-5 pr-5">
+            <tr key={'row-' + index} className="flex flex-row w-full justify-start pt-5 pr-5">
                 <td className="w-1/5 text-center">{record.id}</td>
                 <td className="w-1/5 text-center">{record.weather_description}</td>
                 <td className="w-1/5 text-center">{record.city}</td>
@@ -63,8 +62,8 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     const renderMobileTable = () => {
         return (
-            <table className="h-screen w-screen bg-blue-900 text-white text-sm">
-                <caption className="bg-blue-900 w-screen border-b-2 ">
+            <table className="h-screen w-full bg-blue-900 text-white text-sm">
+                <caption className="bg-blue-900 w-full border-b-2 ">
                     Daily Forecast
                     <Link className="bg-black hover:scale-120 hover:cursor-pointer pl-5 pr-5 mr-5 rounded-3xl" href="/dashboard">Back</Link>
                     </caption>
@@ -84,10 +83,10 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
 
     return (
         <div className={cn(
-            "rounded-3xl shadow-black shadow-lg opacity-90 overflow-y-auto overflow-x-clip",
+            "shadow-black shadow-lg opacity-90 overflow-y-auto overflow-x-clip",
             {
-                'h-70 lg:h-auto w-auto': open,
-                'h-15 w-auto': !open
+                'h-70 lg:h-auto w-full': open,
+                'h-15 w-full': !open
             }
 
         )}>

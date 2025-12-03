@@ -7,8 +7,6 @@ import LocationCard from "./location-card";
 import Card from "./card";
 import WeatherTable from "./weather-table";
 import { addWeatherRecord } from "../actions";
-import Link from "next/link";
-import ArchiveLink from "./archive-link";
 
 export default function MainContent() {
     const [weather, setWeather] = useState<any>({})
@@ -24,10 +22,9 @@ export default function MainContent() {
     }, [])
     return <>
          <BackgroundRenderer weatherDescription={weather?.current?.weatherDescription} />
-                <div className="z-200 h-screen w-screen fixed">
+                <div className="h-full w-auto">
                     <h1 className="text-white lg:text-2xl font-bold flex flex-row justify-center lg:justify-between pt-8 pl-16 pr-16">
-                        <div className="hidden lg:flex bg-blue-900 opacity-80 w-1/4 shadow-black shadow-lg flex-row justify-center items-center rounded-xl tracking-widest ">The Weather Hub</div>                        
-                        <ArchiveLink/>
+                        <div className="hidden lg:flex bg-blue-900 opacity-80 w-1/4 shadow-black shadow-lg flex-row justify-center items-center rounded-xl tracking-widest ">The Weather Hub</div>                                                
                         <LocationCard title='Location' city={weather?.city} country={weather?.country} />
                     </h1>
                     <div className="flex flex-col lg:flex-row items-center lg:justify-around gap-8 pt-8 lg:pt-16">
