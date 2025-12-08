@@ -63,10 +63,10 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
     const renderMobileTable = () => {
         return (
             <table className="h-screen w-full bg-blue-900 text-white text-sm">
-                <caption className="bg-blue-900 w-full border-b-2 ">
+                {/* <caption className="bg-blue-900 w-full border-b-2 ">
                     Daily Forecast
                     <Link className="bg-black hover:scale-120 hover:cursor-pointer pl-5 pr-5 mr-5 rounded-3xl" href="/dashboard">Back</Link>
-                    </caption>
+                    </caption> */}
                 <tbody>
                     <tr className="w-full flex flex-row justify-start pt-5 pr-5">
                        <th className="w-1/5 text-center underline">ID</th>
@@ -85,7 +85,7 @@ export default function VisitsTable({ records = [] }: { records: Array<any> }) {
         <div className={cn(
             "shadow-black shadow-lg opacity-90 overflow-y-auto overflow-x-clip",
             {
-                'h-70 lg:h-auto w-full': open,
+                'h-full lg:h-auto w-full': open,
                 'h-15 w-full': !open
             }
 
