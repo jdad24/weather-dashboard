@@ -25,11 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="3kdVnYkrdsjRL8bDd-RrTfg7UKqKnVUK5QLAFBl4KS0" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col lg:flex-row`}
-      >        
-          <Navbar/>
-          {children}
+      >
+        <Navbar />
+        {children}
       </body>
     </html>
   );
