@@ -1,4 +1,4 @@
-import { FORECAST_URL } from "../constants"
+import { FORECAST_ROUTE } from "../constants"
 
 /**
  * Weather object that encapsulates weather data
@@ -52,8 +52,9 @@ export class Weather {
      * @param {string} longitude
      * @returns {void}
      */
-    async getWeather() {        
-        const forecastData = await fetch(FORECAST_URL)
+    async getWeather(city?: string, state?: string, country?: string) {     
+        const forecastUrl = city && state && country ? FORECAST_ROUTE + `?city=${city}&state=${state}&country=${country}` : FORECAST_ROUTE;
+        const forecastData = await fetch(forecastUrl, { cache: 'no-store' })
         const forecastJSON = await forecastData.json()
 
         this.current.currentTemperature = forecastJSON.current.temperature_2m.toFixed(0) + " F"

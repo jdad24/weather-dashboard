@@ -1,29 +1,60 @@
 import { fetchWeatherApi } from "openmeteo";
 import { NextRequest, NextResponse } from "next/server";
 import { geolocation } from "@vercel/functions";
-import { OPEN_METEO_FORECAST_URL } from "@/app/lib/constants";
+import { OPEN_METEO_FORECAST_URL, OPEN_METEO_SEARCH_URL } from "@/app/lib/constants";
 
-const url = OPEN_METEO_FORECAST_URL;
+const forecastUrl = OPEN_METEO_FORECAST_URL;
+const searchUrl = OPEN_METEO_SEARCH_URL;
 
 
 /**
  * Retrieves weather data for the user's current location
  */
 export async function GET(request: NextRequest) {
-    const { city = "", country = "Antarctica", latitude: geoLat = -82.86, longitude: geoLong = 135.00 } = geolocation(request);
-    console.log(await geolocation(request))
+    const searchParams = request.nextUrl.searchParams;
+    let userCity = searchParams.get('city')
+    let userCountry = searchParams.get('country')
+    let userState = searchParams.get('state')
+    let userLat, userLong
+
+    if (userCity && userCountry && userState) {
+        const queryParams = new URLSearchParams({ name: userCity });
+
+        const fullSearchUrl = `${searchUrl}?${queryParams.toString()}`;
+        const response = await fetch(fullSearchUrl);
+        const data = await response.json();
+
+        if (data && data.results && data.results.length > 0) {
+            const location = data.results[0];
+            console.log(`Found location: ${location.name}, ${location.country} (${location.latitude}, ${location.longitude})`);
+            userLat = location.latitude;
+            userLong = location.longitude;
+        } else {
+            console.log(`Location not found for query: ${userCity}, ${userState}, ${userCountry}`);
+            return new Response(JSON.stringify({ error: 'Location not found' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' },
+            });
+        }
+    } else {
+        const { city = "", country = "Antarctica", latitude: geoLat = -82.86, longitude: geoLong = 135.00 } = geolocation(request);
+        userCity = city;
+        userCountry = country;
+        userLat = geoLat;
+        userLong = geoLong;
+    }
 
     const params = {
-        latitude: geoLat,
-        longitude: geoLong,
+        latitude: userLat,
+        longitude: userLong,
         daily: ["weather_code", "temperature_2m_max", "temperature_2m_min", "rain_sum", "showers_sum", "snowfall_sum", "precipitation_sum", "precipitation_hours", "precipitation_probability_max"],
         current: ["temperature_2m", "precipitation", "rain", "is_day", "weather_code", "wind_speed_10m", "wind_direction_10m"],
         timezone: "America/Chicago",
         wind_speed_unit: "mph",
-        temperature_unit: "fahrenheit",        
+        temperature_unit: "fahrenheit",
     };
 
-    const responses = await fetchWeatherApi(url, params);
+    const responses = await fetchWeatherApi(forecastUrl, params);
     // Process first location. Add a for-loop for multiple locations or weather models
     const response = responses[0];
 
@@ -72,8 +103,8 @@ export async function GET(request: NextRequest) {
             precipitation_hours: daily.variables(7)!.valuesArray(),
             precipitation_probability_max: daily.variables(8)!.valuesArray(),
         },
-        city,
-        country
+        city: userCity,
+        country: userCountry
     };
 
     // The 'weatherData' object now contains a simple structure, with arrays of datetimes and weather information
