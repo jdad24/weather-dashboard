@@ -24,8 +24,8 @@ export function SearchCard({ setWeather }: any) {
         console.log(`Searched for: ${city}, ${state}, ${country}`);
     }
     return (
-        <div className="bg-blue-900 w-2/5 opacity-80 shadow-black shadow-lg lg:flex flex-col justify-start items-start rounded-xl p-4 gap-2 tracking-widest">
-            <div className="text-3xl text-center w-full">Search Location</div>
+        <div className="bg-blue-900 font-semibold lg:w-2/5 w-full opacity-80 shadow-black shadow-lg lg:flex flex-col justify-start items-start rounded-xl p-4 gap-2 tracking-widest">
+            <div className="text-2xl text-left w-full pb-3">Search Location</div>
             <div className="flex flex-row">
                 <div className="w-30 pr-5">City:</div> <TextField onChange={e => setCity(e.target.value)} className="bg-white" variant="outlined" size="small" />
             </div>
